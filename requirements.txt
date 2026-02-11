@@ -1,0 +1,33 @@
+# Core MCP framework
+mcp>=1.0.0
+
+# Device connectivity
+netmiko>=4.0.0
+ncclient>=0.6.0
+scrapli[asyncssh]>=2024.0.0
+ntc-templates>=8.0.0
+
+# Configuration
+python-dotenv>=1.0.0
+pydantic-settings>=2.0.0
+
+# Security
+defusedxml>=0.7.1
+
+# Retry logic
+tenacity>=8.2.0
+
+# Optional: SNMP support
+# pysnmp>=6.0.0
+
+# Optional: NetBox integration
+# pynetbox>=7.0.0
+
+# Optional: pyATS/Genie (Cisco testing framework)
+# pyats>=24.0
+# genie>=24.0
+
+# Optional: Parallel execution
+# nornir>=3.4.0
+# nornir-scrapli>=2024.0.0
+# nornir-netmiko>=1.0.0

@@ -1,0 +1,38 @@
+# Quick-start lab: 2 FRR routers with OSPF peering
+# Requires: containerlab (https://containerlab.dev)
+#
+# Deploy:  sudo containerlab deploy -t topology.clab.yml
+# Destroy: sudo containerlab destroy -t topology.clab.yml
+#
+# After deploy, add these devices to your .env or config/devices.py
+
+name: quickstart
+
+topology:
+  nodes:
+    router1:
+      kind: linux
+      image: frrouting/frr:v8.4.1
+      mgmt-ipv4: 172.20.20.11
+      binds:
+        - configs/router1-frr.conf:/etc/frr/frr.conf
+        - configs/router1-daemons:/etc/frr/daemons
+      exec:
+        - ip link set eth1 mtu 1500
+
+    router2:
+      kind: linux
+      image: frrouting/frr:v8.4.1
+      mgmt-ipv4: 172.20.20.12
+      binds:
+        - configs/router2-frr.conf:/etc/frr/frr.conf
+        - configs/router2-daemons:/etc/frr/daemons
+      exec:
+        - ip link set eth1 mtu 1500
+
+  links:
+    - endpoints: ["router1:eth1", "router2:eth1"]
+
+mgmt:
+  network: clab-quickstart
+  ipv4-subnet: 172.20.20.0/24

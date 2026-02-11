@@ -1,0 +1,32 @@
+# Virtual environment
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Environment files (contain credentials)
+.env
+
+# Data (runtime generated)
+data/
+*.db
+
+# Config backups (contain device configs)
+backups/
+data/config_backups/*.cfg
+
+# OS
+.DS_Store
+Thumbs.db
