@@ -26,7 +26,7 @@ An [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server that 
 ### 1. Install
 
 ```bash
-git clone https://github.com/econners/network-mcp.git
+git clone https://github.com/E-Conners-Lab/MCP-DEMO-LAB.git
 cd network-mcp
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
