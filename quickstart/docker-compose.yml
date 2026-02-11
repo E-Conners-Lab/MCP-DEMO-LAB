@@ -1,0 +1,51 @@
+# Quick-start lab: 2 FRR routers with OSPF peering
+# Equivalent to the Containerlab topology for Docker Desktop (macOS/Windows)
+#
+# Deploy:  docker compose up -d
+# Destroy: docker compose down
+
+services:
+  router1:
+    image: frrouting/frr:v8.4.1
+    container_name: router1
+    hostname: router1
+    privileged: true
+    volumes:
+      - ./configs/router1-frr.conf:/etc/frr/frr.conf
+      - ./configs/router1-daemons:/etc/frr/daemons
+    networks:
+      mgmt:
+        ipv4_address: 172.30.30.11
+      p2p-link:
+        ipv4_address: 10.0.12.1
+    ports:
+      - "2221:22"
+
+  router2:
+    image: frrouting/frr:v8.4.1
+    container_name: router2
+    hostname: router2
+    privileged: true
+    volumes:
+      - ./configs/router2-frr.conf:/etc/frr/frr.conf
+      - ./configs/router2-daemons:/etc/frr/daemons
+    networks:
+      mgmt:
+        ipv4_address: 172.30.30.12
+      p2p-link:
+        ipv4_address: 10.0.12.2
+    ports:
+      - "2222:22"
+
+networks:
+  mgmt:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.30.0/24
+  p2p-link:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.12.0/24
+          gateway: 10.0.12.254
