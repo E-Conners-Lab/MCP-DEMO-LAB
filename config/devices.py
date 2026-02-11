@@ -67,19 +67,17 @@ _STATIC_DEVICES = {
     #     "password": PASSWORD,
     # },
 
-    # --- Example Containerlab devices ---
-    # These work with the quickstart lab (quickstart/topology.clab.yml):
-    #
-    # "router1": {
-    #     "device_type": "containerlab_frr",
-    #     "container": "clab-quickstart-router1",
-    #     "host": "172.20.20.11",
-    # },
-    # "router2": {
-    #     "device_type": "containerlab_frr",
-    #     "container": "clab-quickstart-router2",
-    #     "host": "172.20.20.12",
-    # },
+    # --- Quickstart lab (docker compose or containerlab) ---
+    "router1": {
+        "device_type": "containerlab_frr",
+        "container": "router1",
+        "host": "172.30.30.11",
+    },
+    "router2": {
+        "device_type": "containerlab_frr",
+        "container": "router2",
+        "host": "172.30.30.12",
+    },
 }
 
 # Device host lookup (name -> IP)

@@ -98,7 +98,8 @@ async def _send_command_raw(device_name: str, command: str) -> str:
     if is_containerlab_device(device_name):
         from core.containerlab import run_command
         container = device.get("container", "")
-        return await run_command(container, command)
+        is_frr = device.get("device_type") == "containerlab_frr"
+        return await run_command(container, command, frr=is_frr)
 
     from core.scrapli_manager import send_command as scrapli_send
     device_type = device.get("device_type", "cisco_xe")

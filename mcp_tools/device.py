@@ -82,7 +82,8 @@ async def send_command(device_name: str, command: str) -> str:
             container = device.get("container", "")
             if not container:
                 return json.dumps({"error": f"No container name configured for {device_name}"})
-            output = await run_command(container, command)
+            is_frr = device_type == "containerlab_frr"
+            output = await run_command(container, command, frr=is_frr)
         else:
             from core.scrapli_manager import send_command as scrapli_send
             output = await throttled(

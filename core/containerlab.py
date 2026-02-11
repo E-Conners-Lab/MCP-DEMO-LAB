@@ -32,12 +32,13 @@ def _validate_shell_safe(value: str) -> bool:
     return bool(_SAFE_PATTERN.match(value))
 
 
-async def run_command(container: str, command: str) -> str:
+async def run_command(container: str, command: str, *, frr: bool = False) -> str:
     """Execute *command* inside a containerlab container via ``docker exec``.
 
     Args:
         container: Docker container name (e.g. ``clab-quickstart-router1``)
         command: Command to execute inside the container
+        frr: If True, wrap command with ``vtysh -c`` for FRRouting devices
 
     Returns:
         stdout from the command
@@ -51,7 +52,10 @@ async def run_command(container: str, command: str) -> str:
     if not _validate_shell_safe(command):
         raise ValueError(f"Unsafe command: {command!r}")
 
-    cmd = ["docker", "exec", container] + shlex.split(command)
+    if frr:
+        cmd = ["docker", "exec", container, "vtysh", "-c", command]
+    else:
+        cmd = ["docker", "exec", container] + shlex.split(command)
 
     proc = await asyncio.create_subprocess_exec(
         *cmd,
